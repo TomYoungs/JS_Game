@@ -16,7 +16,8 @@ var config = {
   }
 };
 
-
+var score = 0;
+var scoreText;
 var game = new Phaser.Game(config);
 
 function preload ()
