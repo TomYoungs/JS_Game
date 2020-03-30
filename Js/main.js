@@ -5,7 +5,7 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 500 },
       debug: false
     }
   },
@@ -15,27 +15,33 @@ var config = {
     update: update
   }
 };
+var game = new Phaser.Game(config);
 
+var map;
+var player;
+var cursor;
+var groundLayer, coinLayer;
+var text;
 var score = 0;
 var scoreText;
-var game = new Phaser.Game(config);
 
 function preload ()
 {
   this.load.image('sky', 'assets/sky.png');
-  this.load.image('ground', 'assets/platform.png');
+  this.load.tilemapTiledJSON('map', 'assets/map.json');
   this.load.image('star', 'assets/star.png');
   this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('dude',
-  'assets/dude.png',
-  { frameWidth: 32, frameHeight: 48 }
-);
+  this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
 }
 
 var platforms;
 
 function create ()
 {
+  map = this.make.tilemap({key: 'map'})
+  var groundTiles = map.addTilesetImage('tiles')
+
   this.add.image(400, 300, 'sky');
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
   platforms = this.physics.add.staticGroup();
