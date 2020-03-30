@@ -29,12 +29,16 @@ function preload ()
   //'assets/dude.png',
 //  { frameWidth: 32, frameHeight: 48 }
 //);
-this.load.spritesheet('testchar',
-'assets/spritetest1.png',
-{ frameWidth: 26, frameHeight: 57 }
+//this.load.spritesheet('testchar',
+//'assets/spritetest1.png',
+//{ frameWidth: 26, frameHeight: 57 }
+//);
+//}
+this.load.spritesheet('dude2',
+'assets/dude2.png',
+{frameWidth: 47, frameHeight:72 }
 );
 }
-
 var platforms;
 
 function create ()
@@ -43,7 +47,7 @@ function create ()
   platforms = this.physics.add.staticGroup();
   platforms.create(400, 300, 'ground').setScale(2).refreshBody();
 //  player = this.physics.add.sprite(50, 50, 'dude');
-player = this.physics.add.sprite(50,50,'testchar');
+player = this.physics.add.sprite(47,72,'dude2');
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
@@ -57,19 +61,19 @@ player = this.physics.add.sprite(50,50,'testchar');
   this.physics.add.collider(player, platforms);
   this.anims.create({
     key: 'left',
-    frames: this.anims.generateFrameNumbers('testchar', { start: 87, end: 95 }),
+    frames: this.anims.generateFrameNumbers('dude2', { start: 1, end: 13 }),
     frameRate: 10,
     repeat: -1
   });
   this.anims.create({
     key: 'turn',
-    frames: [ { key: 'testchar', frame: 8 } ],
+    frames: [ { key: 'testchar', frame: 14 } ],
     frameRate: 20
   });
 
   this.anims.create({
     key: 'right',
-    frames: this.anims.generateFrameNumbers('testchar', { start: 77, end: 69 }),
+    frames: this.anims.generateFrameNumbers('testchar', { start: 2, end: 14 }),
     frameRate: 10,
     repeat: -1
   });
