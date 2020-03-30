@@ -25,6 +25,7 @@ function preload ()
   this.load.image('ground', 'assets/platform.png');
 this.load.image('star', 'assets/star.png');
   this.load.image('bomb', 'assets/bomb.png');
+  this.load.image('skyplatform','assets/skyplatform.png');
   //this.load.spritesheet('dude',
   //'assets/dude.png',
   //{ frameWidth: 32, frameHeight: 48 }
@@ -35,7 +36,7 @@ this.load.image('star', 'assets/star.png');
 //);
 this.load.spritesheet('dude2',
 'assets/dude2.png',
-{frameWidth: 47, frameHeight:75 }
+{frameWidth: 27, frameHeight:72 }
 );
 
 var platforms;
@@ -45,15 +46,23 @@ function create ()
   this.add.image(400, 300, 'sky');
   platforms = this.physics.add.staticGroup();
   platforms.create(400, 300, 'ground').setScale(2).refreshBody();
+  platforms.create (30,110,'skyplatform').setScale(2).refreshBody();
   //player = this.physics.add.sprite(50, 50, 'dude');
-player = this.physics.add.sprite(47,75,'dude2');
+player = this.physics.add.sprite(27,72,'dude2');
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
+
+  this.anims.create({
+    key: 'right',
+    frames: this.anims.generateFrameNumbers('dude2', { start: 1, end: 7 }),
+    frameRate: 10,
+    repeat: -1
+  });
 
   this.physics.add.collider(player, platforms);
   this.anims.create({
     key: 'left',
-    frames: this.anims.generateFrameNumbers('dude2', { start: 1, end: 7 }),
+    frames: this.anims.generateFrameNumbers('dude2', { start: 7, end: 14 }),
     frameRate: 10,
     repeat: -1
   });
@@ -66,16 +75,11 @@ player = this.physics.add.sprite(47,75,'dude2');
   //});
   this.anims.create({
     key: 'turn',
-    frames: [ { key: 'dude2', frame: 14 } ],
-    frameRate: 10
+    frames: [ { key: 'dude2', frame: 6 } ],
+    frameRate: 20
   });
 
-  this.anims.create({
-    key: 'right',
-    frames: this.anims.generateFrameNumbers('dude2', { start: 7, end: 14 }),
-    frameRate: 10,
-    repeat: -1
-  });
+
 
   stars = this.physics.add.group({
     key: 'star',
